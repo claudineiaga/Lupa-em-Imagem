@@ -1,0 +1,73 @@
+html {
+    min-height: 100vh;
+    --mask-blur: 20px;
+    --mask-size: 15vmin;
+    --mask-x: 25%;
+    --mask-y: 25%;
+    --zoom: 1.5;
+    cursor: crosshair;
+    font-family: system-ui;
+  }
+  
+  p {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    margin: 0;
+    font-size: 2rem;
+  }
+  
+  #bottom_layer {
+    position: fixed;
+    inset: 0;
+    background: 
+      url(imagem2.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform-origin: var(--mask-x) var(--mask-y);
+    transform: scale(var(--zoom));
+    image-rendering: auto;
+  }
+  
+  #mid_layer {
+    position: fixed;
+    inset: 0;
+    background: 
+      url(imagem2.JPG);
+      background-repeat: no-repeat;
+    background-size: contain;
+    mask:radial-gradient(circle var(--mask-size) at var(--mask-x) var(--mask-y), transparent 99%, #fff 100%);
+  }
+  
+  #lens {
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(var(--mask-blur));
+    -webkit-mask:radial-gradient(circle var(--mask-size) at var(--mask-x) var(--mask-y), transparent 99%, #fff 100%);
+    mask:radial-gradient(circle var(--mask-size) at var(--mask-x) var(--mask-y), transparent 99%, #fff 100%);
+    filter: drop-shadow(-5px 5px 5px rgba(0,0,0,.25));
+  }
+  #lens:before {
+    content: '';
+    width: calc(var(--mask-size) * .5);
+    aspect-ratio: 1/4;
+    background: black;
+    position: absolute;
+    left: var(--mask-x);
+    top: var(--mask-y);
+    transform-origin: 50% 00%;
+    transform: translate(25%,25%) rotate(-37.5deg);
+    border-radius: 0 0 1rem 1rem;
+  }
+  #lens:after {
+    content: '';
+    width: calc(var(--mask-size) * 2);
+    aspect-ratio: 1/1;
+    background: dimgray;
+    position: absolute;
+    left: var(--mask-x);
+    top: var(--mask-y);
+    border-radius: 50%;
+    transform: translate(-50%,-50%);
+    border: 10px solid black;  
+  }
